@@ -16,24 +16,24 @@
     <div class="container todoapp-wrapper">
       <!-- This section should be hidden by default and shown when there are todos -->
        <!-- DEBUG -->
-       <!-- <pre>
+       <pre>
         <code>
           {{ tasks() | json}}
         </code>
-       </pre> -->
+       </pre>
       <section class="main">
         <ul class="todo-list">
           <li 
           [class.completed]="task.completed" 
           [class.editing]="task.editing" 
-          (dblclick)="activeEditing(i)" 
-          *ngFor="let task of tasksByFilter(); index as i">
+          (dblclick)="activeEditing(task.id)" 
+          *ngFor="let task of tasksByFilter()">
             <div class="view">
-              <input class="toggle" type="checkbox" [checked]="task.completed" (change)="updateTask(i)"/>
+              <input class="toggle" type="checkbox" [checked]="task.completed" (change)="updateTask(task.id)"/>
               <label>{{ task.title }}</label>
-              <button class="destroy" (click)="deleteTask(i)"></button>
+              <button class="destroy" (click)="deleteTask(task.id)"></button>
             </div>
-            <input class="edit" [value]="task.title" (keydown.enter)="sendEditing($event, i)"/>
+            <input class="edit" [value]="task.title" (keydown.enter)="sendEditing($event, task.id)"/>
           </li>
           <!---
           <li class="completed">
@@ -64,7 +64,7 @@
         </ul>
       </section>
       <!-- This footer should be hidden by default and shown when there are todos -->
-      <footer class="footer" *ngIf="tasksByFilter().length > 0">
+      <footer class="footer" *ngIf="tasksByFilter().length > 0 || tasks().length > 0">
         <!-- This should be `0 items left` by default -->
          <div *ngIf="tasksByFilter().length === 1; else items">
           <span class="todo-count"><strong>{{ tasksByFilter().length }}</strong> item </span>
