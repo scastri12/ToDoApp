@@ -1,0 +1,18 @@
+.container {
+    padding: 3rem;
+}
+.box {
+    background-color: red;
+    height: 10px;
+    display: block;
+    width: 20px;
+}
+.ms-error {
+    background-color: red;
+    color: white;
+    opacity: 0;
+    transition: all linear .5s;
+}
+.ms-error.show {
+    opacity: 1;
+}

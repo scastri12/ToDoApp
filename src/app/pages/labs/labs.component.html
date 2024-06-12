@@ -1,0 +1,58 @@
+<div class="container">
+  <h1>Hola mi primer proyecto</h1>
+  <h2>{{welcome}}</h2>
+  <ul>
+    <li *ngFor="let task of tasks">
+      {{ task }}
+    </li>
+  </ul>
+  <hr />
+  <h2>{{'Hola'.repeat(4) }}</h2>
+  <h2>La suma de 3 + 3 es {{ 3 + 3 }}</h2>
+  <h4>Hola soy {{ name() }} y mi edad es {{ age }}</h4>
+  <hr />
+  <img [src]="person().img" alt="">
+  <input type="number" [value]="person().age">
+  <button (click)="clickHandler()">Click me</button>
+  <button (dblclick)="clickHandler()">Doble click me</button>
+  <p>(change)</p>
+  <input type="number" [value]="person().age" (change)="changeHandler($event)">
+  <p>(Keydown)</p>
+  <input type="text" [value]="person().name" (keydown)="keydownHandler($event)">
+  <p>(Keydown con atajo)</p>
+  <input type="text" [value]="person().name" (keydown.shift)="clickHandler()">
+  <h1>Signals con keydown</h1>
+  <input type="text" [value]="name()" (keydown)="keydownHandler($event)">
+  <p>name: {{ name() }}</p>
+  <div *ngIf="person().name === 'Santi' && person().age > 18; else miBloque">
+    Hola soy santi y soy mayor de 18 años
+  </div>
+  <ng-template #miBloque>
+    <div>
+      Acceso denegado
+    </div>
+  </ng-template>
+  <div [ngSwitch]="person().name">
+    <div *ngSwitchCase="'Santi'">switch de santi</div>
+    <div *ngSwitchCase="'isa'">switch de isa</div>
+    <div *ngSwitchDefault>switch por default</div>
+  </div>
+  <input type="color" [formControl]="colorCtrl">
+  <p>color: {{ colorCtrl.value }}</p>
+  <svg>
+    <g>
+      <rect x="0" y="0" height="100" width="100" [attr.fill]="colorCtrl.value"/>
+    </g>
+  </svg>
+  <hr />
+  <input type="number" [formControl]="widthCtrl">
+  <span class="box" [style.width.px]="widthCtrl.value"></span>
+  <hr />
+  <p>
+    <input type="text" [formControl]="nameCtrl"> <br />
+    <span class="ms-error" [class.show]="nameCtrl.invalid && nameCtrl.touched">Nombre invalido</span>
+  </p>
+  <p>
+    <input type="text">
+  </p>   
+</div>
